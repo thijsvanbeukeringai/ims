@@ -21,6 +21,7 @@
   <meta name="twitter:title" content="Evenementen Logboek &amp; Calamiteiten Logboek | IMS" />
   <meta name="twitter:description" content="IMS is het digitale evenementen logboek en calamiteiten logboek voor evenementenprofessionals. Real-time event logs, incident coördinatie en automatische rapportage." />
   <meta name="twitter:image" content="https://imsystem.nl/Brandassets/crowd-at-concert-summer-music-festival-2026-01-09-08-03-06-utc.webp" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1172,46 +1173,15 @@
   </div>
 </div>
 
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
-  function openModal() {
-    document.getElementById('demoModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('demoModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.getElementById('demoModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-  document.getElementById('demoForm').addEventListener('submit', function(e) {
+  function openCalendly(e) {
     e.preventDefault();
-    const bedrijf    = document.getElementById('bedrijf').value;
-    const evenementen = document.getElementById('evenementen').value;
-    const email      = document.getElementById('email').value;
-    const telefoon   = document.getElementById('telefoon').value;
-    const body = `Demo aanvraag via imsystem.nl%0A%0ABedrijfsnaam: ${encodeURIComponent(bedrijf)}%0AAantal evenementen: ${encodeURIComponent(evenementen)}%0AE-mail: ${encodeURIComponent(email)}%0ATelefoonnummer: ${encodeURIComponent(telefoon)}`;
-    window.location.href = `mailto:info@imsystem.nl?subject=${encodeURIComponent('Demo aanvraag – ' + bedrijf)}&body=${body}`;
-    document.getElementById('demoForm').style.display = 'none';
-    document.getElementById('modalSuccess').style.display = 'block';
-    setTimeout(closeModal, 3000);
-  });
+    Calendly.initPopupWidget({ url: 'https://calendly.com/teamfifteennl' });
+  }
 
-  // Attach modal to all demo buttons
-  document.querySelectorAll('a[href="#contact"]').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openModal();
-    });
-  });
-  document.querySelectorAll('.btn-green, .nav-demo').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openModal();
-    });
+  document.querySelectorAll('a[href="#contact"], .btn-green, .nav-demo').forEach(function(btn) {
+    btn.addEventListener('click', openCalendly);
   });
 </script>
 
