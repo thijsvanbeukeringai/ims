@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMS Brandguide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:       #0EA5E9;
+      --primary-dark:  #0284C7;
+      --primary-light: #f0f9ff;
+      --primary-mid:   #e0f2fe;
+      --red:           #ef4444;
+      --amber:         #f59e0b;
+      --blue:          #3b82f6;
+      --text:          #0a0f1e;
+      --text-2:        #2d3748;
+      --muted:         #718096;
+      --border:        #e8edf2;
+      --bg:            #ffffff;
+      --bg-2:          #f7f9fc;
+      --dark:          #0a0f1e;
+      --dark-2:        #141b2d;
+      --radius:        16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg-2);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 1000px; margin: 0 auto; padding: 60px 32px 120px; }
+
+    .cover {
+      background: var(--dark);
+      border-radius: 24px;
+      padding: 80px 60px;
+      margin-bottom: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .cover-text h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .cover-text h1 span { color: var(--primary); }
+    .cover-text p { color: rgba(255,255,255,.5); font-size: .95rem; }
+    .cover-logo {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+    }
+    .cover-logo img { height: 40px; width: auto; filter: invert(0); }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: 72px; }
+    .section-title {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .section-heading {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--text);
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── LOGO ── */
+    .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .logo-box {
+      border-radius: 16px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .logo-box.light { background: #fff; border: 1px solid var(--border); }
+    .logo-box.dark  { background: var(--dark); }
+    .logo-box.primary { background: var(--primary); }
+    .logo-box.gray  { background: var(--bg-2); border: 1px solid var(--border); }
+    .logo-box img { height: 36px; width: auto; }
+    .logo-box img.invert { filter: invert(1); }
+    .logo-label { font-size: .75rem; font-weight: 600; color: var(--muted); }
+    .logo-label.light-label { color: rgba(255,255,255,.5); }
+
+    .logo-rules { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .logo-rule {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: .82rem;
+      color: var(--text-2);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .logo-rule .icon { font-size: 1rem; margin-top: 1px; flex-shrink: 0; }
+
+    /* ── COLORS ── */
+    .color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .color-card { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+    .color-swatch { height: 90px; width: 100%; }
+    .color-info { padding: 14px 16px; background: #fff; }
+    .color-name { font-size: .82rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .color-hex  { font-size: .75rem; font-weight: 500; color: var(--muted); font-family: 'Courier New', monospace; }
+    .color-role { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── TYPOGRAPHY ── */
+    .type-stack { display: flex; flex-direction: column; gap: 24px; }
+    .type-row {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .type-sample { color: var(--text); }
+    .type-spec { font-size: .72rem; color: var(--muted); font-family: 'Courier New', monospace; white-space: nowrap; text-align: right; }
+
+    /* ── BUTTONS ── */
+    .btn-grid { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 11px;
+      font-size: .9rem; font-weight: 600; text-decoration: none;
+      border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(14,165,233,.3); }
+    .btn-dark    { background: var(--dark); color: #fff; }
+    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+    .btn-ghost   { background: var(--bg-2); color: var(--text); }
+    .btn-danger  { background: var(--red); color: #fff; }
+
+    /* ── BADGES / STATUS ── */
+    .badge-grid { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 13px; border-radius: 20px;
+      font-size: .75rem; font-weight: 700;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .badge-live    { background: rgba(14,165,233,.12); color: var(--primary); }
+    .badge-live .badge-dot { background: var(--primary); }
+    .badge-high    { background: rgba(239,68,68,.12); color: var(--red); }
+    .badge-high .badge-dot { background: var(--red); }
+    .badge-medium  { background: rgba(245,158,11,.12); color: var(--amber); }
+    .badge-medium .badge-dot { background: var(--amber); }
+    .badge-low     { background: rgba(100,116,139,.1); color: var(--muted); }
+    .badge-low .badge-dot { background: var(--muted); }
+    .badge-ok      { background: rgba(34,197,94,.12); color: #16a34a; }
+    .badge-ok .badge-dot { background: #22c55e; }
+
+    /* ── SPACING ── */
+    .spacing-grid { display: flex; align-items: flex-end; gap: 16px; }
+    .spacing-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .spacing-block { background: var(--primary); border-radius: 6px; width: 48px; }
+    .spacing-label { font-size: .72rem; color: var(--muted); font-family: 'Courier New', monospace; }
+
+    /* ── RADIUS ── */
+    .radius-grid { display: flex; gap: 16px; align-items: flex-end; }
+    .radius-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .radius-block { width: 72px; height: 72px; background: var(--primary-mid); border: 2px solid var(--primary); }
+    .radius-label { font-size: .72rem; color: var(--muted); font-family: 'Courier New', monospace; text-align: center; }
+
+    /* ── VOICE ── */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .voice-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .voice-card h4 { font-size: .82rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .voice-card p  { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    .voice-do   { border-top: 3px solid #22c55e; }
+    .voice-dont { border-top: 3px solid var(--red); }
+    .voice-tag  { font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+    .voice-do .voice-tag   { color: #16a34a; }
+    .voice-dont .voice-tag { color: var(--red); }
+
+    /* ── FOOTER ── */
+    .guide-footer {
+      text-align: center;
+      padding-top: 60px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    /* ── PRINT / PDF ── */
+    @media print {
+      @page { size: A4; margin: 0; }
+      body { background: #fff; }
+      .page { padding: 0; max-width: 100%; }
+      .cover { border-radius: 0; margin-bottom: 0; page-break-after: always; }
+      .section { page-break-inside: avoid; }
+      .color-grid { grid-template-columns: repeat(4, 1fr); }
+      .logo-grid { grid-template-columns: 1fr 1fr; }
+      .voice-grid { grid-template-columns: 1fr 1fr; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-text">
+      <h1>IMS <span>Brandguide</span></h1>
+      <p>Versie 1.0 &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; imsystem.nl</p>
+    </div>
+    <div class="cover-logo">
+      <img src="Brandassets/ims wit 2.webp" alt="IMS logo" />
+    </div>
+  </div>
+
+  <!-- 1. LOGO -->
+  <div class="section">
+    <div class="section-title">01 &nbsp; Logo</div>
+    <div class="section-heading">Logo gebruik</div>
+
+    <div class="logo-grid">
+      <div class="logo-box light">
+        <img src="Brandassets/ims wit 2.webp" alt="IMS logo" style="filter:invert(1)" />
+        <span class="logo-label">Op witte achtergrond — gebruik donkere versie</span>
+      </div>
+      <div class="logo-box dark">
+        <img src="Brandassets/ims wit 2.webp" alt="IMS logo" />
+        <span class="logo-label light-label">Op donkere achtergrond — gebruik witte versie</span>
+      </div>
+      <div class="logo-box primary">
+        <img src="Brandassets/ims wit 2.webp" alt="IMS logo" />
+        <span class="logo-label light-label">Op primaire kleur — gebruik witte versie</span>
+      </div>
+      <div class="logo-box gray">
+        <img src="Brandassets/ims wit 2.webp" alt="IMS logo" style="filter:invert(1)" />
+        <span class="logo-label">Op grijze achtergrond — gebruik donkere versie</span>
+      </div>
+    </div>
+
+    <div class="logo-rules">
+      <div class="logo-rule"><span class="icon">✓</span> Gebruik altijd het originele logo zonder aanpassingen</div>
+      <div class="logo-rule"><span class="icon">✓</span> Laat voldoende witruimte rondom het logo</div>
+      <div class="logo-rule"><span class="icon">✗</span> Verander de kleur of roteer het logo niet</div>
+      <div class="logo-rule"><span class="icon">✗</span> Plaats het logo niet op drukke of slecht contrasterende achtergronden</div>
+    </div>
+  </div>
+
+  <!-- 2. KLEUREN -->
+  <div class="section">
+    <div class="section-title">02 &nbsp; Kleuren</div>
+    <div class="section-heading">Kleurenpalet</div>
+
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background:#0EA5E9"></div>
+        <div class="color-info">
+          <div class="color-name">Primary</div>
+          <div class="color-hex">#0EA5E9</div>
+          <div class="color-role">Knoppen, accenten, links</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#0284C7"></div>
+        <div class="color-info">
+          <div class="color-name">Primary Dark</div>
+          <div class="color-hex">#0284C7</div>
+          <div class="color-role">Hover states, actieve elementen</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#0a0f1e"></div>
+        <div class="color-info">
+          <div class="color-name">Dark</div>
+          <div class="color-hex">#0a0f1e</div>
+          <div class="color-role">Primaire tekst, hero achtergrond</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#141b2d"></div>
+        <div class="color-info">
+          <div class="color-name">Dark 2</div>
+          <div class="color-hex">#141b2d</div>
+          <div class="color-role">Panelen, dashboard achtergrond</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#ef4444"></div>
+        <div class="color-info">
+          <div class="color-name">Danger / High</div>
+          <div class="color-hex">#ef4444</div>
+          <div class="color-role">High priority, foutmeldingen</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#f59e0b"></div>
+        <div class="color-info">
+          <div class="color-name">Warning / Medium</div>
+          <div class="color-hex">#f59e0b</div>
+          <div class="color-role">Medium priority, waarschuwingen</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#718096"></div>
+        <div class="color-info">
+          <div class="color-name">Muted</div>
+          <div class="color-hex">#718096</div>
+          <div class="color-role">Secondaire tekst, labels</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#f7f9fc; border-bottom: 1px solid #e8edf2;"></div>
+        <div class="color-info">
+          <div class="color-name">Background</div>
+          <div class="color-hex">#f7f9fc</div>
+          <div class="color-role">Paginaachtergrond, secties</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. TYPOGRAFIE -->
+  <div class="section">
+    <div class="section-title">03 &nbsp; Typografie</div>
+    <div class="section-heading">Inter — de enige font</div>
+
+    <div class="type-stack">
+      <div class="type-row">
+        <div class="type-sample" style="font-size:3rem;font-weight:900;letter-spacing:-.04em;line-height:1">Display</div>
+        <div class="type-spec">Inter 900 &nbsp;·&nbsp; 48px &nbsp;·&nbsp; ls: -0.04em<br>Pagina H1, hero titels</div>
+      </div>
+      <div class="type-row">
+        <div class="type-sample" style="font-size:2rem;font-weight:800;letter-spacing:-.03em;line-height:1.1">Heading 1</div>
+        <div class="type-spec">Inter 800 &nbsp;·&nbsp; 32px &nbsp;·&nbsp; ls: -0.03em<br>Sectie titels</div>
+      </div>
+      <div class="type-row">
+        <div class="type-sample" style="font-size:1.4rem;font-weight:700;letter-spacing:-.02em">Heading 2</div>
+        <div class="type-spec">Inter 700 &nbsp;·&nbsp; 22px &nbsp;·&nbsp; ls: -0.02em<br>Subsectie titels, feature namen</div>
+      </div>
+      <div class="type-row">
+        <div class="type-sample" style="font-size:1rem;font-weight:600">Subheading</div>
+        <div class="type-spec">Inter 600 &nbsp;·&nbsp; 16px<br>Labels, knoppen, navigatie</div>
+      </div>
+      <div class="type-row">
+        <div class="type-sample" style="font-size:.95rem;font-weight:400;color:#2d3748">Body tekst. IMS helpt teams incidenten sneller te detecteren en af te handelen zonder communicatieverlies.</div>
+        <div class="type-spec">Inter 400 &nbsp;·&nbsp; 15px<br>Bodytekst, beschrijvingen</div>
+      </div>
+      <div class="type-row">
+        <div class="type-sample" style="font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0EA5E9">SECTIE LABEL</div>
+        <div class="type-spec">Inter 700 &nbsp;·&nbsp; 12px &nbsp;·&nbsp; uppercase<br>Sectie labels boven headings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. KNOPPEN -->
+  <div class="section">
+    <div class="section-title">04 &nbsp; Knoppen</div>
+    <div class="section-heading">Button stijlen</div>
+
+    <div class="btn-grid">
+      <button class="btn btn-primary">Demo aanvragen</button>
+      <button class="btn btn-dark">Inloggen</button>
+      <button class="btn btn-outline">Bekijk functies</button>
+      <button class="btn btn-ghost">Meer info</button>
+      <button class="btn btn-danger">Incident melden</button>
+    </div>
+  </div>
+
+  <!-- 5. BADGES & STATUS -->
+  <div class="section">
+    <div class="section-title">05 &nbsp; Badges & Status</div>
+    <div class="section-heading">Prioriteit en status labels</div>
+
+    <div class="badge-grid">
+      <span class="badge badge-live"><span class="badge-dot"></span>Live</span>
+      <span class="badge badge-high"><span class="badge-dot"></span>High Priority</span>
+      <span class="badge badge-medium"><span class="badge-dot"></span>Medium Priority</span>
+      <span class="badge badge-low"><span class="badge-dot"></span>Low Priority</span>
+      <span class="badge badge-ok"><span class="badge-dot"></span>Afgehandeld</span>
+    </div>
+  </div>
+
+  <!-- 6. SPACING -->
+  <div class="section">
+    <div class="section-title">06 &nbsp; Spacing</div>
+    <div class="section-heading">Ruimte en afronding</div>
+
+    <div class="spacing-grid" style="margin-bottom:40px">
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:8px"></div>
+        <div class="spacing-label">4px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:16px"></div>
+        <div class="spacing-label">8px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:24px"></div>
+        <div class="spacing-label">12px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:32px"></div>
+        <div class="spacing-label">16px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:48px"></div>
+        <div class="spacing-label">24px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:64px"></div>
+        <div class="spacing-label">32px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:96px"></div>
+        <div class="spacing-label">48px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="height:128px"></div>
+        <div class="spacing-label">64px</div>
+      </div>
+    </div>
+
+    <div class="radius-grid">
+      <div class="radius-item">
+        <div class="radius-block" style="border-radius:4px"></div>
+        <div class="radius-label">4px<br>Klein</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-block" style="border-radius:8px"></div>
+        <div class="radius-label">8px<br>Standaard</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-block" style="border-radius:12px"></div>
+        <div class="radius-label">12px<br>Kaarten</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-block" style="border-radius:16px"></div>
+        <div class="radius-label">16px<br>Secties</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-block" style="border-radius:24px"></div>
+        <div class="radius-label">24px<br>Hero blokken</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. TONE OF VOICE -->
+  <div class="section">
+    <div class="section-title">07 &nbsp; Tone of Voice</div>
+    <div class="section-heading">Hoe IMS communiceert</div>
+
+    <div class="voice-grid">
+      <div class="voice-card voice-do">
+        <div class="voice-tag">Gebruik wel</div>
+        <h4>Direct en zelfverzekerd</h4>
+        <p>"IMS geeft uw team real-time inzicht in elk incident, zodat u direct kunt handelen."</p>
+      </div>
+      <div class="voice-card voice-dont">
+        <div class="voice-tag">Gebruik niet</div>
+        <h4>Vaag en passief</h4>
+        <p>"IMS kan mogelijk helpen bij het monitoren van bepaalde situaties die zich eventueel kunnen voordoen."</p>
+      </div>
+      <div class="voice-card voice-do">
+        <div class="voice-tag">Gebruik wel</div>
+        <h4>Professioneel en helder</h4>
+        <p>"Overdracht aan politie direct vanuit het logboek, met tijdstempel en incidentnummer."</p>
+      </div>
+      <div class="voice-card voice-dont">
+        <div class="voice-tag">Gebruik niet</div>
+        <h4>Te informeel of speels</h4>
+        <p>"Super handig! Met IMS hoef je nooit meer te stressen over incidenten op jouw event!"</p>
+      </div>
+      <div class="voice-card voice-do">
+        <div class="voice-tag">Gebruik wel</div>
+        <h4>Korte, krachtige zinnen</h4>
+        <p>"Real-time. Betrouwbaar. Voor elke controlroom."</p>
+      </div>
+      <div class="voice-card voice-dont">
+        <div class="voice-tag">Gebruik niet</div>
+        <h4>Lange, ingewikkelde zinnen</h4>
+        <p>"Door gebruik te maken van ons uitgebreide en veelzijdige systeem kunt u op een efficiënte en gestroomlijnde manier uw incidenten beheren."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-footer">
+    &copy; 2026 IMS, imsystem.nl &nbsp;·&nbsp; Brandguide v1.0 &nbsp;·&nbsp; Alle rechten voorbehouden
+  </div>
+
+</div>
+</body>
+</html>
